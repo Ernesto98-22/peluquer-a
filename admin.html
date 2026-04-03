@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Peluquería Rosa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: 'Inter', sans-serif; background: #fff5f7; }
+        .admin-layout { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
+        .admin-sidebar { background: #ff69b4; color: white; padding: 2rem 1.5rem; position: sticky; top:0; height:100vh; overflow-y:auto; }
+        .admin-logo { font-size: 1.8rem; font-weight:700; font-family:'Playfair Display',serif; letter-spacing:2px; margin-bottom:2rem; text-align:center; }
+        .admin-nav { list-style: none; }
+        .admin-nav li { margin-bottom:0.5rem; }
+        .admin-nav a { display: flex; align-items:center; gap:12px; padding:0.8rem 1rem; color:rgba(255,255,255,0.8); text-decoration:none; border-radius:12px; transition:0.3s; }
+        .admin-nav a i { width:24px; }
+        .admin-nav a:hover, .admin-nav a.active { background:rgba(255,255,255,0.2); color:white; }
+        .admin-content { padding:2rem; }
+        .admin-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; flex-wrap:wrap; gap:1rem; }
+        .admin-header h1 { font-size:1.8rem; font-family:'Playfair Display',serif; color:#ff69b4; }
+        .logout-btn { background:#ff69b4; color:white; border:none; padding:0.6rem 1.5rem; border-radius:40px; cursor:pointer; font-weight:500; transition:0.3s; display:inline-flex; align-items:center; gap:8px; }
+        .logout-btn:hover { background:#ff85c1; }
+        .admin-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1.5rem; margin-bottom:2rem; }
+        .admin-card { background:white; padding:1.5rem; border-radius:16px; box-shadow:0 2px 10px rgba(0,0,0,0.05); }
+        .admin-card h3 { font-size:0.85rem; color:#666; margin-bottom:0.5rem; text-transform:uppercase; letter-spacing:1px; }
+        .admin-card .number { font-size:2rem; font-weight:700; color:#ff69b4; }
+        .admin-section { background:white; padding:1.5rem; border-radius:16px; box-shadow:0 2px 10px rgba(0,0,0,0.05); margin-bottom:2rem; }
+        .admin-section h2 { margin-bottom:1.5rem; font-size:1.3rem; font-family:'Playfair Display',serif; color:#ff69b4; display:flex; align-items:center; gap:8px; }
+        .add-btn { background:#ff69b4; color:white; border:none; padding:0.7rem 1.5rem; border-radius:40px; cursor:pointer; font-weight:500; margin-bottom:1.5rem; display:inline-flex; align-items:center; gap:8px; }
+        .add-btn:hover { background:#ff85c1; }
+        .products-table { width:100%; border-collapse:collapse; overflow-x:auto; display:block; }
+        .products-table th, .products-table td { padding:1rem; text-align:left; border-bottom:1px solid #eee; }
+        .products-table th { font-weight:600; color:#666; background:#fafafa; }
+        .products-table img { width:50px; height:50px; object-fit:cover; border-radius:8px; }
+        .action-btn { padding:0.4rem 0.8rem; border:none; border-radius:6px; cursor:pointer; font-size:0.85rem; margin-right:0.5rem; transition:0.2s; }
+        .edit-btn { background:#ff69b4; color:white; }
+        .delete-btn { background:#c00; color:white; }
+        .reviews-list { display:flex; flex-direction:column; gap:1rem; }
+        .review-item { padding:1rem; background:#f9f9f9; border-radius:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+        .review-content { flex:1; }
+        .review-content strong { display:block; margin-bottom:0.3rem; }
+        .review-rating { color:#ffb347; margin-bottom:0.3rem; }
+        .approve-btn { background:#27ae60; color:white; }
+        .reject-btn { background:#e67e22; color:white; }
+        .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.8); align-items:center; justify-content:center; }
+        .modal.active { display:flex; }
+        .modal-content { background:white; padding:2rem; border-radius:24px; max-width:500px; width:90%; }
+        .modal-content h3 { margin-bottom:1rem; font-family:'Playfair Display',serif; }
+        .modal-content input, .modal-content select, .modal-content textarea { width:100%; padding:0.8rem; margin-bottom:1rem; border:1px solid #ffccdd; border-radius:12px; }
+        .modal-actions { display:flex; gap:1rem; justify-content:flex-end; }
+        .btn-cancel { background:#ccc; color:#333; }
+        .btn-save { background:#ff69b4; color:white; }
+        .login-container { display:flex; justify-content:center; align-items:center; min-height:100vh; background:#fff5f7; }
+        .login-box { background:white; padding:2rem; border-radius:24px; width:100%; max-width:400px; text-align:center; box-shadow:0 10px 30px rgba(0,0,0,0.1); }
+        .login-box h2 { margin-bottom:1.5rem; font-family:'Playfair Display',serif; color:#ff69b4; }
+        .login-box input { width:100%; padding:0.8rem; margin-bottom:1rem; border:1px solid #ffccdd; border-radius:12px; }
+        .login-box button { width:100%; padding:0.8rem; background:#ff69b4; color:white; border:none; border-radius:40px; font-weight:600; cursor:pointer; }
+        .error-msg { color:#c00; margin-top:1rem; font-size:0.9rem; }
+        @media (max-width:768px) { .admin-layout { grid-template-columns:1fr; } .admin-sidebar { position:relative; height:auto; } }
+    </style>
+</head>
+<body>
+    <div id="adminApp">
+        <div id="loginContainer" class="login-container">
+            <div class="login-box">
+                <h2><i class="fas fa-user-shield"></i> Acceso Admin</h2>
+                <input type="email" id="adminEmail" placeholder="Correo electrónico">
+                <input type="password" id="adminPassword" placeholder="Contraseña">
+                <button id="loginBtn">Ingresar</button>
+                <div id="loginError" class="error-msg"></div>
+            </div>
+        </div>
+        <div id="dashboard" style="display: none;">
+            <div class="admin-layout">
+                <aside class="admin-sidebar">
+                    <div class="admin-logo">PELUQUERÍA ROSA</div>
+                    <nav>
+                        <ul class="admin-nav">
+                            <li><a href="#" data-section="products" class="active"><i class="fas fa-cut"></i> Productos</a></li>
+                            <li><a href="#" data-section="reservas"><i class="fas fa-calendar-alt"></i> Reservas</a></li>
+                            <li><a href="#" data-section="reviews"><i class="fas fa-star"></i> Reseñas</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+                <main class="admin-content">
+                    <div class="admin-header">
+                        <h1>Panel de Administración</h1>
+                        <button id="logoutBtn" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</button>
+                    </div>
+                    <div class="admin-cards">
+                        <div class="admin-card"><h3>Total Productos</h3><div class="number" id="totalProducts">0</div></div>
+                        <div class="admin-card"><h3>Reservas Pendientes</h3><div class="number" id="pendingReservas">0</div></div>
+                        <div class="admin-card"><h3>Reseñas Pendientes</h3><div class="number" id="pendingReviews">0</div></div>
+                    </div>
+                    <div id="productsSection" class="admin-section">
+                        <h2><i class="fas fa-cut"></i> Productos</h2>
+                        <button class="add-btn" id="addProductBtn"><i class="fas fa-plus"></i> Agregar Producto</button>
+                        <div style="overflow-x:auto;"><table class="products-table"><thead><tr><th>Imagen</th><th>Nombre</th><th>Categoría</th><th>Precio</th><th>Acciones</th></tr></thead><tbody id="productsTableBody"></tbody></table></div>
+                    </div>
+                    <div id="reservasSection" class="admin-section" style="display:none;">
+                        <h2><i class="fas fa-calendar-alt"></i> Reservas</h2>
+                        <div style="overflow-x:auto;"><table class="products-table"><thead><tr><th>Nombre</th><th>Teléfono</th><th>Fecha</th><th>Hora</th><th>Servicios</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="reservasTableBody"></tbody></table></div>
+                    </div>
+                    <div id="reviewsSection" class="admin-section" style="display:none;">
+                        <h2><i class="fas fa-star"></i> Reseñas Pendientes</h2>
+                        <div id="pendingReviewsList" class="reviews-list"></div>
+                        <h2 style="margin-top:2rem;">Reseñas Aprobadas</h2>
+                        <div id="approvedReviewsList" class="reviews-list"></div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+    <div id="productModal" class="modal"><div class="modal-content"><h3 id="modalTitle">Agregar Producto</h3><input type="text" id="prodNombre" placeholder="Nombre"><input type="number" id="prodPrecio" placeholder="Precio"><input type="text" id="prodImagen" placeholder="URL imagen"><select id="prodCategoria"><option value="tintes">Tintes</option><option value="champus">Champús</option><option value="keratinas">Queratinas</option><option value="cremas">Cremas</option><option value="variados">Variados</option></select><div class="modal-actions"><button class="btn-cancel" id="cancelProductBtn">Cancelar</button><button class="btn-save" id="saveProductBtn">Guardar</button></div></div></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // ========================================
+        // CONFIGURACIÓN DE SUPABASE (EMBEBIDA)
+        // ¡REEMPLAZA CON TUS DATOS REALES DE PELUQUERÍA!
+        // ========================================
+        const SUPABASE_URL = 'https://TU_PROYECTO_PELUQUERIA.supabase.co';
+        const SUPABASE_ANON_KEY = 'TU_CLAVE_ANONIMA_AQUI';
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        let currentUser = null;
+        let editingProductId = null;
+        let productsData = [];
+        let reservasData = [];
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (!supabase) { 
+                document.getElementById('loginError').innerHTML = 'Error de conexión con Supabase. Verifica las credenciales.'; 
+                return;
+            }
+            await checkAdminSession();
+            document.getElementById('addProductBtn')?.addEventListener('click', () => openProductModal());
+            document.getElementById('cancelProductBtn')?.addEventListener('click', () => closeProductModal());
+            document.getElementById('saveProductBtn')?.addEventListener('click', () => saveProduct());
+            document.getElementById('logoutBtn')?.addEventListener('click', logout);
+            document.getElementById('loginBtn')?.addEventListener('click', login);
+            document.querySelectorAll('.admin-nav a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const section = link.dataset.section;
+                    document.querySelectorAll('.admin-nav a').forEach(a => a.classList.remove('active'));
+                    link.classList.add('active');
+                    document.getElementById('productsSection').style.display = section === 'products' ? 'block' : 'none';
+                    document.getElementById('reservasSection').style.display = section === 'reservas' ? 'block' : 'none';
+                    document.getElementById('reviewsSection').style.display = section === 'reviews' ? 'block' : 'none';
+                });
+            });
+        });
+
+        async function checkAdminSession() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) return;
+            const { data: adminData } = await supabase.from('admin_emails').select('email').eq('email', session.user.email).single();
+            if (adminData) {
+                currentUser = session.user;
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+                loadProducts();
+                loadReservas();
+                loadReviews();
+                updateStats();
+            } else { 
+                await supabase.auth.signOut(); 
+            }
+        }
+
+        async function login() {
+            const email = document.getElementById('adminEmail').value;
+            const password = document.getElementById('adminPassword').value;
+            const errorDiv = document.getElementById('loginError');
+            if (!email || !password) { errorDiv.innerHTML = 'Completa todos los campos'; return; }
+            const { error } = await supabase.auth.signInWithPassword({ email, password });
+            if (error) { errorDiv.innerHTML = 'Credenciales inválidas'; return; }
+            const { data: adminData } = await supabase.from('admin_emails').select('email').eq('email', email).single();
+            if (!adminData) { errorDiv.innerHTML = 'No tienes permisos de administrador'; await supabase.auth.signOut(); return; }
+            currentUser = (await supabase.auth.getUser()).data.user;
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+            loadProducts(); loadReservas(); loadReviews(); updateStats();
+        }
+
+        async function logout() { await supabase.auth.signOut(); location.reload(); }
+
+        async function loadProducts() {
+            const { data } = await supabase.from('productos').select('*').order('created_at', { ascending: false });
+            productsData = data || [];
+            const tbody = document.getElementById('productsTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = productsData.map(p => `
+                <tr>
+                    <td><img src="${p.imagen_url||'https://placehold.co/50x50'}" alt="${p.nombre}"></td>
+                    <td>${escapeHtml(p.nombre)}</td> <td>${p.categoria}</td>
+                    <td>$${p.precio.toLocaleString()}</td>
+                    <td><button class="action-btn edit-btn" onclick="window.editProduct('${p.id}')"><i class="fas fa-edit"></i></button>
+                    <button class="action-btn delete-btn" onclick="window.deleteProduct('${p.id}')"><i class="fas fa-trash"></i></button></td>
+                </tr>
+            `).join('');
+        }
+
+        window.editProduct = (id) => {
+            const p = productsData.find(p => p.id === id);
+            if (p) {
+                editingProductId = id;
+                document.getElementById('prodNombre').value = p.nombre;
+                document.getElementById('prodPrecio').value = p.precio;
+                document.getElementById('prodImagen').value = p.imagen_url || '';
+                document.getElementById('prodCategoria').value = p.categoria;
+                document.getElementById('modalTitle').innerHTML = 'Editar Producto';
+                document.getElementById('productModal').classList.add('active');
+            }
+        };
+        window.deleteProduct = async (id) => { if (confirm('¿Eliminar?')) { await supabase.from('productos').delete().eq('id', id); loadProducts(); updateStats(); } };
+        function openProductModal() { editingProductId = null; document.getElementById('prodNombre').value = ''; document.getElementById('prodPrecio').value = ''; document.getElementById('prodImagen').value = ''; document.getElementById('prodCategoria').value = 'tintes'; document.getElementById('modalTitle').innerHTML = 'Agregar Producto'; document.getElementById('productModal').classList.add('active'); }
+        function closeProductModal() { document.getElementById('productModal').classList.remove('active'); }
+        async function saveProduct() {
+            const nombre = document.getElementById('prodNombre').value.trim();
+            const precio = parseFloat(document.getElementById('prodPrecio').value);
+            const imagen_url = document.getElementById('prodImagen').value.trim();
+            const categoria = document.getElementById('prodCategoria').value;
+            if (!nombre || isNaN(precio)) { alert('Datos inválidos'); return; }
+            if (editingProductId) { await supabase.from('productos').update({ nombre, precio, imagen_url, categoria }).eq('id', editingProductId); }
+            else { await supabase.from('productos').insert([{ nombre, precio, imagen_url, categoria }]); }
+            closeProductModal(); loadProducts(); updateStats();
+        }
+
+        async function loadReservas() {
+            const { data } = await supabase.from('reservas').select('*').order('created_at', { ascending: false });
+            reservasData = data || [];
+            const tbody = document.getElementById('reservasTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = reservasData.map(r => `
+                <tr>
+                    <td>${escapeHtml(r.nombre)}</td><td>${r.telefono}</td><td>${r.fecha}</td><td>${r.hora}</td><td>${escapeHtml(r.servicios)}</td>
+                    <td><span style="background:${r.estado==='pendiente'?'#ffb347':'#27ae60'}; padding:4px 8px; border-radius:20px;">${r.estado}</span></td>
+                    <td><button class="action-btn" style="background:#27ae60; color:white;" onclick="window.updateReserva('${r.id}','confirmada')">Aprobar</button>
+                    <button class="action-btn delete-btn" onclick="window.deleteReserva('${r.id}')">Eliminar</button></td>
+                </tr>
+            `).join('');
+        }
+        window.updateReserva = async (id, estado) => { await supabase.from('reservas').update({ estado }).eq('id', id); loadReservas(); updateStats(); };
+        window.deleteReserva = async (id) => { if (confirm('¿Eliminar reserva?')) { await supabase.from('reservas').delete().eq('id', id); loadReservas(); updateStats(); } };
+
+        async function loadReviews() {
+            const { data } = await supabase.from('reviews').select('*').order('created_at', { ascending: false });
+            const pending = data.filter(r => !r.approved);
+            const approved = data.filter(r => r.approved);
+            document.getElementById('pendingReviewsList').innerHTML = pending.map(r => renderReviewItem(r, false)).join('');
+            document.getElementById('approvedReviewsList').innerHTML = approved.map(r => renderReviewItem(r, true)).join('');
+            document.getElementById('pendingReviews').innerText = pending.length;
+        }
+        function renderReviewItem(r, isApproved) {
+            const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+            return `<div class="review-item"><div class="review-content"><strong>${escapeHtml(r.nombre_usuario)}</strong><div class="review-rating">${stars}</div><p>${escapeHtml(r.comentario)}</p><small>${new Date(r.created_at).toLocaleDateString()}</small></div><div class="review-actions">${!isApproved ? `<button class="action-btn approve-btn" onclick="window.approveReview('${r.id}')">Aprobar</button>` : ''}<button class="action-btn delete-btn" onclick="window.deleteReview('${r.id}')">Eliminar</button></div></div>`;
+        }
+        window.approveReview = async (id) => { await supabase.from('reviews').update({ approved: true }).eq('id', id); loadReviews(); updateStats(); };
+        window.deleteReview = async (id) => { if (confirm('¿Eliminar reseña?')) { await supabase.from('reviews').delete().eq('id', id); loadReviews(); updateStats(); } };
+
+        async function updateStats() {
+            const { count: productCount } = await supabase.from('productos').select('*', { count: 'exact', head: true });
+            const { count: pendingReservas } = await supabase.from('reservas').select('*', { count: 'exact', head: true }).eq('estado', 'pendiente');
+            const { count: pendingReviews } = await supabase.from('reviews').select('*', { count: 'exact', head: true }).eq('approved', false);
+            document.getElementById('totalProducts').innerText = productCount || 0;
+            document.getElementById('pendingReservas').innerText = pendingReservas || 0;
+            document.getElementById('pendingReviews').innerText = pendingReviews || 0;
+        }
+        function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); }
+    </script>
+</body>
+</html>

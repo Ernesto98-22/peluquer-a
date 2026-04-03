@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Peluquería Rosa – Estilo y elegancia para mujeres modernas. Cortes, coloraciones y tratamientos de alta calidad.">
+    <meta name="theme-color" content="#ff69b4">
+    <title>Peluquería Rosa | Estilo y Elegancia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- HERO SECTION -->
+    <header class="hero" id="inicio" role="banner">
+        <div class="hero-overlay" aria-hidden="true"></div>
+        
+        <nav class="hero-nav" role="navigation" aria-label="Navegación principal">
+            <div class="nav-container">
+                <a href="#inicio" class="logo" aria-label="Peluquería Rosa - Inicio">PELUQUERÍA ROSA</a>
+                
+                <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#reservas">Reservas</a></li>
+                    <li><a href="#catalogo">Catálogo</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#testimonios">Testimonios</a></li>
+                </ul>
+                
+                <div class="nav-actions" id="navActions">
+                    <div class="search-wrapper">
+                        <input type="search" id="searchInput" placeholder="Buscar productos..." aria-label="Buscar productos">
+                        <button id="searchBtn" aria-label="Buscar"><i class="fas fa-search"></i></button>
+                    </div>
+                    <button class="auth-btn" id="authBtn" onclick="mostrarModal()" aria-label="Acceder a tu cuenta"><i class="fas fa-user"></i> Acceder</button>
+                    <a href="#reservas" class="nav-comprar">Reservar <i class="fas fa-calendar-alt"></i></a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="hero-content">
+            <div class="hero-text-left">
+                <h1 class="hero-slogan">BELLEZA QUE<br>TRASCIENDE</h1>
+                <p class="hero-description-left">
+                    Cortes, coloraciones y tratamientos premium diseñados para resaltar tu estilo único. Productos de alta calidad y atención personalizada en un ambiente acogedor.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#reservas" class="btn-primary">
+                        <span>Reserva tu cita</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#catalogo" class="btn-outline">
+                        <span>Descubre productos</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-right-content">
+                <div class="hero-badge">
+                    <span class="badge-icon" aria-hidden="true">✦</span>
+                    <span class="badge-text">Nueva Colección 2026</span>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Productos Premium</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">+1500</span>
+                        <span class="stat-label">Clientes Satisfechas</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">10+</span>
+                        <span class="stat-label">Años de Experiencia</span>
+                    </div>
+                </div>
+                <div class="hero-3d-element">
+                    <div class="floating-card">
+                        <span class="card-title">Promoción Especial</span>
+                        <span class="card-subtitle">20% dto. en tu primera visita</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-scroll-indicator" aria-hidden="true">
+            <span>Desliza</span>
+            <div class="scroll-arrow">↓</div>
+        </div>
+    </header>
+
+    <main>
+        <!-- RESERVAS SECTION -->
+        <section id="reservas" class="section reservas-section">
+            <div class="container">
+                <div class="reservas-header">
+                    <h2 class="section-title-left">Reserva tu cita</h2>
+                    <p class="section-subtitle">Elige los servicios que deseas y reserva tu horario. Te confirmaremos por WhatsApp.</p>
+                </div>
+                
+                <form id="reservationForm" class="reservation-form" aria-label="Formulario de reservas">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nombre"><i class="fas fa-user"></i> Nombre completo *</label>
+                            <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono"><i class="fas fa-phone"></i> Teléfono *</label>
+                            <input type="tel" id="telefono" name="telefono" required placeholder="+53 5XXX XXXX" value="+53 ">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fecha"><i class="fas fa-calendar"></i> Fecha *</label>
+                            <input type="date" id="fecha" name="fecha" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hora"><i class="fas fa-clock"></i> Hora *</label>
+                            <select id="hora" name="hora" required>
+                                <option value="">Seleccionar hora</option>
+                                <option value="10:00">10:00 AM</option>
+                                <option value="11:00">11:00 AM</option>
+                                <option value="12:00">12:00 PM</option>
+                                <option value="13:00">1:00 PM</option>
+                                <option value="14:00">2:00 PM</option>
+                                <option value="15:00">3:00 PM</option>
+                                <option value="16:00">4:00 PM</option>
+                                <option value="17:00">5:00 PM</option>
+                                <option value="18:00">6:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-cut"></i> Servicios * (puedes elegir varios)</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="servicio" value="corte"> Corte de cabello</label>
+                            <label><input type="checkbox" name="servicio" value="tinte"> Coloración / Tinte</label>
+                            <label><input type="checkbox" name="servicio" value="tratamiento"> Tratamiento capilar</label>
+                            <label><input type="checkbox" name="servicio" value="peinado"> Peinado / Recogido</label>
+                            <label><input type="checkbox" name="servicio" value="keratina"> Alisado / Keratina</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="notas"><i class="fas fa-comment"></i> Notas adicionales</label>
+                        <textarea id="notas" name="notas" rows="2" placeholder="¿Alguna preferencia?"></textarea>
+                    </div>
+                    
+                    <div id="formStatus" class="form-status" role="alert"></div>
+                    
+                    <button type="submit" id="submitBtn" class="submit-btn">
+                        <i class="fas fa-calendar-check"></i> Confirmar Reserva
+                    </button>
+                    
+                    <p class="form-trust">
+                        <i class="fas fa-shield-alt"></i> 
+                        Recibirás confirmación por WhatsApp en menos de 30 minutos.
+                    </p>
+                </form>
+            </div>
+        </section>
+
+        <!-- CATÁLOGO DE PRODUCTOS -->
+        <section id="catalogo" class="section catalog-section">
+            <div class="container">
+                <div class="catalogo-header">
+                    <div>
+                        <h2 class="section-title-left">Nuestros Productos</h2>
+                        <p class="section-subtitle">Lo mejor para el cuidado y embellecimiento de tu cabello.</p>
+                    </div>
+                    <div class="catalogo-cta">
+                        <p>¿Buscas algo específico?</p>
+                        <a href="#contacto" class="btn-outline">Contáctanos</a>
+                    </div>
+                </div>
+                
+                <div class="category-bar centered" role="tablist">
+                    <button class="cat-btn active" data-category="todos" role="tab" aria-selected="true">Todos</button>
+                    <button class="cat-btn" data-category="tintes" role="tab" aria-selected="false">Tintes</button>
+                    <button class="cat-btn" data-category="champus" role="tab" aria-selected="false">Champús</button>
+                    <button class="cat-btn" data-category="keratinas" role="tab" aria-selected="false">Queratinas</button>
+                    <button class="cat-btn" data-category="cremas" role="tab" aria-selected="false">Cremas</button>
+                    <button class="cat-btn" data-category="variados" role="tab" aria-selected="false">Variados</button>
+                </div>
+                
+                <div class="productos-grid" id="productosGrid" role="tabpanel"></div>
+                
+                <div class="catalogo-footer">
+                    <p>¿No encuentras lo que buscas?</p>
+                    <a href="#contacto" class="btn-primary">Solicitar Asesoría</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SOBRE NOSOTROS -->
+        <section id="nosotros" class="section about-section">
+            <div class="container">
+                <div class="about-header">
+                    <div>
+                        <h2 class="section-title-left">Sobre Nosotros</h2>
+                        <p class="about-highlight">
+                            En Peluquería Rosa combinamos técnica, creatividad y los mejores productos para realzar tu belleza natural. Cada servicio es personalizado, desde el corte hasta la coloración, utilizando marcas de alta gama que protegen tu cabello.
+                        </p>
+                        <p class="about-highlight">
+                            Nuestro equipo de estilistas se actualiza constantemente en las últimas tendencias para ofrecerte resultados espectaculares. Ven y descubre por qué somos el lugar preferido de las mujeres que valoran la calidad y el estilo.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="why-us">
+                    <h3>¿Por qué elegirnos?</h3>
+                    <div class="features-grid">
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-cut"></i></div>
+                            <h4>Estilistas Expertos</h4>
+                            <p>Profesionales con años de experiencia y formación continua.</p>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-leaf"></i></div>
+                            <h4>Productos Premium</h4>
+                            <p>Solo utilizamos marcas de alta calidad, libres de químicos agresivos.</p>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-heart"></i></div>
+                            <h4>Atención Personalizada</h4>
+                            <p>Escuchamos tus necesidades y te asesoramos para lograr tu mejor versión.</p>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-calendar-alt"></i></div>
+                            <h4>Reserva Rápida</h4>
+                            <p>Agenda tu cita en minutos y recibe confirmación inmediata.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIOS Y GALERÍA -->
+        <section id="testimonios" class="section testimonials-section">
+            <div class="container">
+                <div class="two-columns">
+                    <div>
+                        <h2 class="section-title-left">Testimonios</h2>
+                        <p class="section-subtitle">Lo que dicen nuestras clientas sobre su experiencia.</p>
+                        
+                        <div class="testimonios-carousel">
+                            <div class="testimonios-slider" id="testimoniosSlider"></div>
+                            <div class="carousel-controls">
+                                <button class="carousel-btn" id="prevTestimonio" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+                                <button class="carousel-btn" id="nextTestimonio" aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="section-title-left">El estilo de nuestras clientas</h3>
+                        <p class="section-subtitle">Descubre los looks que hemos creado para ellas.</p>
+                        
+                        <div class="clientes-gallery">
+                            <img src="https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop" alt="Corte de pelo moderno" loading="lazy">
+                            <img src="https://www.istockphoto.com/es/foto/mujer-pelirroja-con-pelo-rizado-gm1012542440-272748025" alt="Coloración rojiza" loading="lazy">
+                            <img src="https://images.pexels.com/photos/3993447/pexels-photo-3993447.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop" alt="Peinado elegante" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-bg" aria-hidden="true"></div>
+        <div class="footer-content">
+            <div class="footer-info">
+                <h3>PELUQUERÍA ROSA</h3>
+                <p class="slogan">Estilo y elegancia para ti</p>
+            </div>
+            
+            <div class="footer-contact">
+                <p><i class="fas fa-map-marker-alt"></i> Calle de la Belleza 123, La Habana, Cuba</p>
+                <p><i class="fas fa-phone"></i> +53 5 123 4567</p>
+                <p><i class="fas fa-envelope"></i> hola@peluqueriarosa.cu</p>
+                <p><i class="fas fa-clock"></i> Lunes a Sábado: 9:00 AM - 7:00 PM</p>
+            </div>
+            
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+            </div>
+            
+            <div class="footer-links">
+                <a href="#">Política de Privacidad</a>
+                <a href="#">Términos y Condiciones</a>
+                <a href="#">Política de Devoluciones</a>
+                <a href="admin.html" class="admin-footer-link"><i class="fas fa-lock"></i> Panel Admin</a>
+            </div>
+            
+            <p class="footer-copyright">© 2026 Peluquería Rosa – Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/5351234567" class="whatsapp-float" aria-label="Contactar por WhatsApp" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Modal de Autenticación -->
+    <div class="modal" id="authModal" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal" aria-label="Cerrar modal"><i class="fas fa-times"></i></button>
+            <h2 id="modalTitle">Tu cuenta</h2>
+            
+            <div id="auth-tabs">
+                <button class="tab-btn active" data-tab="login">Iniciar Sesión</button>
+                <button class="tab-btn" data-tab="register">Registrarse</button>
+            </div>
+            
+            <!-- Login Form -->
+            <form class="auth-form active" id="loginForm" novalidate>
+                <div class="form-group">
+                    <label for="loginUsername">Usuario o correo</label>
+                    <input type="text" id="loginUsername" required placeholder="tu@email.com o nombre de usuario">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Contraseña</label>
+                    <input type="password" id="loginPassword" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="submit-btn">Ingresar</button>
+                <div class="form-status" id="loginStatus"></div>
+            </form>
+            
+            <!-- Register Form -->
+            <form class="auth-form" id="registerForm" novalidate>
+                <div class="form-group">
+                    <label for="registerUsername">Nombre de usuario</label>
+                    <input type="text" id="registerUsername" required placeholder="Tu nombre de usuario">
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Correo electrónico</label>
+                    <input type="email" id="registerEmail" required placeholder="tu@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="registerPhone">Teléfono (+53)</label>
+                    <input type="tel" id="registerPhone" placeholder="+53 5 123 4567">
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Contraseña</label>
+                    <input type="password" id="registerPassword" required minlength="6" placeholder="Mínimo 6 caracteres">
+                </div>
+                <button type="submit" class="submit-btn">Crear cuenta</button>
+                <div class="form-status" id="registerStatus"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts: primero Supabase, luego credenciales y luego app.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // ========================================
+        // CONFIGURACIÓN DE SUPABASE (EMBEBIDA)
+        // ¡REEMPLAZA CON TUS DATOS REALES DE PELUQUERÍA!
+        // ========================================
+        const SUPABASE_URL = 'https://yjrwuwtxccetcfqtwoon.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_wwbhy332ldwRi1iK8sXsGQ_mCy3VQMF';
+        
+        // Inicializar cliente de Supabase y exponerlo globalmente
+        window.supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        console.log('✅ Supabase inicializado correctamente');
+    </script>
+    <script src="app.js"></script>
+</body>
+</html>
