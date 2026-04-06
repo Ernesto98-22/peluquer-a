@@ -2,13 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Paso Firme - Ropa y calzado de autor. Confección artesanal, materiales nobles y diseño exclusivo. Envíos a toda Cuba.">
-    <meta name="keywords" content="ropa, calzado, moda, boutique, Cuba, diseño exclusivo, artesanía">
-    <meta name="author" content="Paso Firme">
-    <meta name="theme-color" content="#111111">
-    <title>Paso Firme | Ropa y Calzado de Autor</title>
-    <link rel="manifest" href="manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Peluquería Rosa – Estilo y elegancia para mujeres modernas. Cortes, coloraciones y tratamientos de alta calidad.">
+    <meta name="theme-color" content="#ff69b4">
+    <title>Peluquería Rosa | Estilo y Elegancia</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -16,15 +13,13 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
     <!-- HERO SECTION -->
     <header class="hero" id="inicio" role="banner">
         <div class="hero-overlay" aria-hidden="true"></div>
         
-        <!-- Navigation -->
         <nav class="hero-nav" role="navigation" aria-label="Navegación principal">
             <div class="nav-container">
-                <a href="#inicio" class="logo" aria-label="Paso Firme - Inicio">PASO FIRME</a>
+                <a href="#inicio" class="logo" aria-label="Peluquería Rosa - Inicio">PELUQUERÍA ROSA</a>
                 
                 <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
                     <i class="fas fa-bars"></i>
@@ -37,6 +32,7 @@
                 
                 <ul class="nav-links" id="navLinks">
                     <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#reservas">Reservas</a></li>
                     <li><a href="#catalogo">Catálogo</a></li>
                     <li><a href="#nosotros">Nosotros</a></li>
                     <li><a href="#testimonios">Testimonios</a></li>
@@ -48,25 +44,24 @@
                         <button id="searchBtn" aria-label="Buscar"><i class="fas fa-search"></i></button>
                     </div>
                     <button class="auth-btn" id="authBtn" onclick="mostrarModal()" aria-label="Acceder a tu cuenta"><i class="fas fa-user"></i> Acceder</button>
-                    <a href="#catalogo" class="nav-comprar" id="comprarNavBtn">Comprar <i class="fas fa-arrow-right"></i></a>
+                    <a href="#reservas" class="nav-comprar">Reservar <i class="fas fa-calendar-alt"></i></a>
                 </div>
             </div>
         </nav>
         
-        <!-- Hero Content (resto igual, no se modifica) -->
         <div class="hero-content">
             <div class="hero-text-left">
-                <h1 class="hero-slogan">ESTILO QUE DEFINE<br>TU LEGADO</h1>
+                <h1 class="hero-slogan">BELLEZA QUE<br>TRASCIENDE</h1>
                 <p class="hero-description-left">
-                    Confección artesanal con materiales nobles seleccionados. Cada prenda es una declaración de autenticidad y calidad sin concesiones. Diseños exclusivos que trascienden tendencias pasajeras.
+                    Cortes, coloraciones y tratamientos premium diseñados para resaltar tu estilo único. Productos de alta calidad y atención personalizada en un ambiente acogedor.
                 </p>
                 <div class="hero-buttons">
-                    <a href="#catalogo" class="btn-primary">
-                        <span>Explorar Colección</span>
+                    <a href="#reservas" class="btn-primary">
+                        <span>Reserva tu cita</span>
                         <i class="fas fa-arrow-right"></i>
                     </a>
-                    <a href="#nosotros" class="btn-outline">
-                        <span>Nuestra Historia</span>
+                    <a href="#catalogo" class="btn-outline">
+                        <span>Descubre productos</span>
                     </a>
                 </div>
             </div>
@@ -74,26 +69,26 @@
             <div class="hero-right-content">
                 <div class="hero-badge">
                     <span class="badge-icon" aria-hidden="true">✦</span>
-                    <span class="badge-text">Colección 2026</span>
+                    <span class="badge-text">Nueva Colección 2026</span>
                 </div>
                 <div class="hero-stats">
                     <div class="stat-item">
                         <span class="stat-number">100%</span>
-                        <span class="stat-label">Materiales Premium</span>
+                        <span class="stat-label">Productos Premium</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number">+500</span>
-                        <span class="stat-label">Clientes Satisfechos</span>
+                        <span class="stat-number">+1500</span>
+                        <span class="stat-label">Clientes Satisfechas</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number">24h</span>
-                        <span class="stat-label">Envío Rápido</span>
+                        <span class="stat-number">10+</span>
+                        <span class="stat-label">Años de Experiencia</span>
                     </div>
                 </div>
                 <div class="hero-3d-element">
                     <div class="floating-card">
-                        <span class="card-title">Nueva Temporada</span>
-                        <span class="card-subtitle">Descubre lo último</span>
+                        <span class="card-title">Promoción Especial</span>
+                        <span class="card-subtitle">20% dto. en tu primera visita</span>
                     </div>
                 </div>
             </div>
@@ -105,137 +100,217 @@
         </div>
     </header>
 
-    <!-- CATÁLOGO SECTION (sin cambios) -->
-    <section class="section catalog-section" id="catalogo" role="region" aria-labelledby="catalogo-title">
-        <div class="container">
-            <div class="catalogo-header">
-                <div>
-                    <h2 class="section-title-left" id="catalogo-title">Nuestro Catálogo</h2>
-                    <p class="section-subtitle">Descubre outfits que definen tu estilo. Cada pieza seleccionada con precisión para ofrecer calidad excepcional.</p>
+    <main>
+        <!-- RESERVAS SECTION -->
+        <section id="reservas" class="section reservas-section">
+            <div class="container">
+                <div class="reservas-header">
+                    <h2 class="section-title-left">Reserva tu cita</h2>
+                    <p class="section-subtitle">Elige los servicios que deseas y reserva tu horario. Te confirmaremos por WhatsApp.</p>
                 </div>
-                <div class="catalogo-cta">
-                    <p>¿Buscas algo específico?</p>
-                    <a href="#contacto" class="btn-outline">Contáctanos</a>
-                </div>
-            </div>
-            
-            <div class="category-bar centered" role="tablist">
-                <button class="cat-btn active" data-category="todos" role="tab" aria-selected="true">Todas</button>
-                <button class="cat-btn" data-category="camisas" role="tab" aria-selected="false">Camisas</button>
-                <button class="cat-btn" data-category="pantalones" role="tab" aria-selected="false">Pantalones</button>
-                <button class="cat-btn" data-category="shorts" role="tab" aria-selected="false">Shorts</button>
-                <button class="cat-btn" data-category="zapatos" role="tab" aria-selected="false">Zapatos</button>
-                <button class="cat-btn" data-category="ninos" role="tab" aria-selected="false">Niños</button>
-            </div>
-            
-            <div class="productos-grid" id="productosGrid" role="tabpanel"></div>
-            
-            <div class="catalogo-footer">
-                <p>¿No encuentras lo que buscas?</p>
-                <a href="#contacto" class="btn-primary">Solicitar Producto Personalizado</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- SOBRE NOSOTROS SECTION (sin cambios) -->
-    <section class="section about-section" id="nosotros" role="region" aria-labelledby="nosotros-title">
-        <div class="container">
-            <div class="about-header">
-                <div>
-                    <h2 class="section-title-left" id="nosotros-title">Sobre Nosotros</h2>
-                    <p class="about-highlight">
-                        Cada prenda cuenta una historia de artesanía y pasión inquebrantable. Desde el primer boceto hasta la costura final, cuidamos cada detalle con dedicación absoluta. Nuestro compromiso es ofrecerte piezas únicas que reflejen tu personalidad y eleven tu presencia en cualquier ocasión. Fundada en 2020, Paso Firme nació de la visión de crear moda consciente que combine tradición artesanal con diseño contemporáneo, trabajando directamente con talleres locales y proveedores certificados para garantizar calidad premium en cada producto.
-                    </p>
-                    <p class="about-highlight">
-                        Creemos en la moda como expresión personal, no como consumo masivo. Por eso nuestras colecciones son limitadas y cada pieza se confecciona con atención meticulosa. Cuando eliges Paso Firme, eliges autenticidad, durabilidad y un estilo que perdura más allá de las tendencias.
-                    </p>
-                </div>
-            </div>
-            
-            <div class="why-us">
-                <h3>¿Por qué nos eligen?</h3>
-                <div class="features-grid">
-                    <div class="feature">
-                        <div class="feature-icon"><i class="fas fa-hand-sparkles"></i></div>
-                        <h4>Materiales Premium</h4>
-                        <p>Telas y cueros seleccionados de los mejores proveedores internacionales. Certificación de calidad en cada material.</p>
+                
+                <form id="reservationForm" class="reservation-form" aria-label="Formulario de reservas">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nombre"><i class="fas fa-user"></i> Nombre completo *</label>
+                            <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono"><i class="fas fa-phone"></i> Teléfono *</label>
+                            <input type="tel" id="telefono" name="telefono" required placeholder="+53 5XXX XXXX" value="+53 ">
+                        </div>
                     </div>
-                    <div class="feature">
-                        <div class="feature-icon"><i class="fas fa-palette"></i></div>
-                        <h4>Diseño Exclusivo</h4>
-                        <p>Colecciones limitadas que no encontrarás en otro lugar. Piezas únicas diseñadas para destacar.</p>
-                    </div>
-                    <div class="feature">
-                        <div class="feature-icon"><i class="fas fa-truck-fast"></i></div>
-                        <h4>Envíos a toda Cuba</h4>
-                        <p>Entregas rápidas y seguras en todo el territorio nacional. Seguimiento en tiempo real de tu pedido.</p>
-                    </div>
-                    <div class="feature">
-                        <div class="feature-icon"><i class="fas fa-heart"></i></div>
-                        <h4>Garantía de Satisfacción</h4>
-                        <p>30 días para cambios y devoluciones. Tu satisfacción es nuestra prioridad absoluta.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TESTIMONIOS SECTION (sin cambios) -->
-    <section class="section testimonials-section" id="testimonios" role="region" aria-labelledby="testimonios-title">
-        <div class="container">
-            <div class="two-columns">
-                <div>
-                    <h2 class="section-title-left" id="testimonios-title">Testimonios</h2>
-                    <p class="section-subtitle">Escucha lo que nuestros clientes dicen sobre su experiencia con Paso Firme.</p>
                     
-                    <div class="testimonios-carousel">
-                        <div class="testimonios-slider" id="testimoniosSlider"></div>
-                        <div class="carousel-controls">
-                            <button class="carousel-btn" id="prevTestimonio" aria-label="Testimonio anterior"><i class="fas fa-chevron-left"></i></button>
-                            <button class="carousel-btn" id="nextTestimonio" aria-label="Testimonio siguiente"><i class="fas fa-chevron-right"></i></button>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fecha"><i class="fas fa-calendar"></i> Fecha *</label>
+                            <input type="date" id="fecha" name="fecha" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hora"><i class="fas fa-clock"></i> Hora *</label>
+                            <select id="hora" name="hora" required>
+                                <option value="">Seleccionar hora</option>
+                                <option value="10:00">10:00 AM</option>
+                                <option value="11:00">11:00 AM</option>
+                                <option value="12:00">12:00 PM</option>
+                                <option value="13:00">1:00 PM</option>
+                                <option value="14:00">2:00 PM</option>
+                                <option value="15:00">3:00 PM</option>
+                                <option value="16:00">4:00 PM</option>
+                                <option value="17:00">5:00 PM</option>
+                                <option value="18:00">6:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-cut"></i> Servicios * (puedes elegir varios)</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="servicio" value="corte"> Corte de cabello</label>
+                            <label><input type="checkbox" name="servicio" value="tinte"> Coloración / Tinte</label>
+                            <label><input type="checkbox" name="servicio" value="tratamiento"> Tratamiento capilar</label>
+                            <label><input type="checkbox" name="servicio" value="peinado"> Peinado / Recogido</label>
+                            <label><input type="checkbox" name="servicio" value="keratina"> Alisado / Keratina</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="notas"><i class="fas fa-comment"></i> Notas adicionales</label>
+                        <textarea id="notas" name="notas" rows="2" placeholder="¿Alguna preferencia?"></textarea>
+                    </div>
+                    
+                    <div id="formStatus" class="form-status" role="alert"></div>
+                    
+                    <button type="submit" id="submitBtn" class="submit-btn">
+                        <i class="fas fa-calendar-check"></i> Confirmar Reserva
+                    </button>
+                    
+                    <p class="form-trust">
+                        <i class="fas fa-shield-alt"></i> 
+                        Recibirás confirmación por WhatsApp en menos de 30 minutos.
+                    </p>
+                </form>
+            </div>
+        </section>
+
+        <!-- CATÁLOGO DE PRODUCTOS -->
+        <section id="catalogo" class="section catalog-section">
+            <div class="container">
+                <div class="catalogo-header">
+                    <div>
+                        <h2 class="section-title-left">Nuestros Productos</h2>
+                        <p class="section-subtitle">Lo mejor para el cuidado y embellecimiento de tu cabello.</p>
+                    </div>
+                    <div class="catalogo-cta">
+                        <p>¿Buscas algo específico?</p>
+                        <a href="#contacto" class="btn-outline">Contáctanos</a>
+                    </div>
+                </div>
+                
+                <div class="category-bar centered" role="tablist">
+                    <button class="cat-btn active" data-category="todos" role="tab" aria-selected="true">Todos</button>
+                    <button class="cat-btn" data-category="tintes" role="tab" aria-selected="false">Tintes</button>
+                    <button class="cat-btn" data-category="champus" role="tab" aria-selected="false">Champús</button>
+                    <button class="cat-btn" data-category="keratinas" role="tab" aria-selected="false">Queratinas</button>
+                    <button class="cat-btn" data-category="cremas" role="tab" aria-selected="false">Cremas</button>
+                    <button class="cat-btn" data-category="variados" role="tab" aria-selected="false">Variados</button>
+                </div>
+                
+                <div class="productos-grid" id="productosGrid" role="tabpanel"></div>
+                
+                <div class="catalogo-footer">
+                    <p>¿No encuentras lo que buscas?</p>
+                    <a href="#contacto" class="btn-primary">Solicitar Asesoría</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SOBRE NOSOTROS -->
+        <section id="nosotros" class="section about-section">
+            <div class="container">
+                <div class="about-header">
+                    <div>
+                        <h2 class="section-title-left">Sobre Nosotros</h2>
+                        <p class="about-highlight">
+                            En Peluquería Rosa combinamos técnica, creatividad y los mejores productos para realzar tu belleza natural. Cada servicio es personalizado, desde el corte hasta la coloración, utilizando marcas de alta gama que protegen tu cabello.
+                        </p>
+                        <p class="about-highlight">
+                            Nuestro equipo de estilistas se actualiza constantemente en las últimas tendencias para ofrecerte resultados espectaculares. Ven y descubre por qué somos el lugar preferido de las mujeres que valoran la calidad y el estilo.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="why-us">
+                    <h3>¿Por qué elegirnos?</h3>
+                    <div class="features-grid">
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-cut"></i></div>
+                            <h4>Estilistas Expertos</h4>
+                            <p>Profesionales con años de experiencia y formación continua.</p>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-leaf"></i></div>
+                            <h4>Productos Premium</h4>
+                            <p>Solo utilizamos marcas de alta calidad, libres de químicos agresivos.</p>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-heart"></i></div>
+                            <h4>Atención Personalizada</h4>
+                            <p>Escuchamos tus necesidades y te asesoramos para lograr tu mejor versión.</p>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-calendar-alt"></i></div>
+                            <h4>Reserva Rápida</h4>
+                            <p>Agenda tu cita en minutos y recibe confirmación inmediata.</p>
                         </div>
                     </div>
                 </div>
-                <div>
-                    <h3 class="section-title-left">El estilo de nuestros clientes</h3>
-                    <p class="section-subtitle">Nuestra comunidad refleja la esencia de Paso Firme: autenticidad y elegancia moderna. Descubre cómo viven nuestra moda.</p>
-                    <div class="clientes-gallery">
-                        <img src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop" alt="Cliente 1" loading="lazy">
-                        <img src="https://images.pexels.com/photos/1001869/pexels-photo-1001869.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop" alt="Cliente 2" loading="lazy">
-                        <img src="https://images.pexels.com/photos/1081685/pexels-photo-1081685.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop" alt="Cliente 3" loading="lazy">
+            </div>
+        </section>
+
+        <!-- TESTIMONIOS Y GALERÍA -->
+        <section id="testimonios" class="section testimonials-section">
+            <div class="container">
+                <div class="two-columns">
+                    <div>
+                        <h2 class="section-title-left">Testimonios</h2>
+                        <p class="section-subtitle">Lo que dicen nuestras clientas sobre su experiencia.</p>
+                        
+                        <div class="testimonios-carousel">
+                            <div class="testimonios-slider" id="testimoniosSlider"></div>
+                            <div class="carousel-controls">
+                                <button class="carousel-btn" id="prevTestimonio" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+                                <button class="carousel-btn" id="nextTestimonio" aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="section-title-left">El estilo de nuestras clientas</h3>
+                        <p class="section-subtitle">Descubre los looks que hemos creado para ellas.</p>
+                        
+                        <div class="clientes-gallery">
+                            <img src="https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop" alt="Corte de pelo moderno" loading="lazy">
+                            <img src="https://images.pexels.com/photos/3993447/pexels-photo-3993447.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop" alt="Coloración" loading="lazy">
+                            <img src="https://images.pexels.com/photos/3993447/pexels-photo-3993447.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop" alt="Peinado elegante" loading="lazy">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- FOOTER (sin cambios) -->
+    <!-- FOOTER -->
     <footer class="footer" role="contentinfo">
         <div class="footer-bg" aria-hidden="true"></div>
         <div class="footer-content">
             <div class="footer-info">
-                <h3>PASO FIRME</h3>
-                <p class="slogan">Moda consciente, diseño único</p>
+                <h3>PELUQUERÍA ROSA</h3>
+                <p class="slogan">Estilo y elegancia para ti</p>
             </div>
+            
             <div class="footer-contact">
-                <p><i class="fas fa-map-marker-alt"></i> Calle de las Flores 123, La Habana, Cuba</p>
+                <p><i class="fas fa-map-marker-alt"></i> Calle de la Belleza 123, La Habana, Cuba</p>
                 <p><i class="fas fa-phone"></i> +53 5 123 4567</p>
-                <p><i class="fas fa-envelope"></i> contacto@pasofirme.cu</p>
+                <p><i class="fas fa-envelope"></i> hola@peluqueriarosa.cu</p>
                 <p><i class="fas fa-clock"></i> Lunes a Sábado: 9:00 AM - 7:00 PM</p>
             </div>
+            
             <div class="social-links">
                 <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                 <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
             </div>
+            
             <div class="footer-links">
                 <a href="#">Política de Privacidad</a>
                 <a href="#">Términos y Condiciones</a>
                 <a href="#">Política de Devoluciones</a>
                 <a href="admin.html" class="admin-footer-link"><i class="fas fa-lock"></i> Panel Admin</a>
             </div>
-            <p class="footer-copyright">© 2026 Paso Firme – Todos los derechos reservados</p>
+            
+            <p class="footer-copyright">© 2026 Peluquería Rosa – Todos los derechos reservados</p>
         </div>
     </footer>
 
@@ -244,15 +319,17 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Auth Modal (sin cambios) -->
+    <!-- Modal de Autenticación -->
     <div class="modal" id="authModal" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
         <div class="modal-content">
             <button class="close-modal" id="closeModal" aria-label="Cerrar modal"><i class="fas fa-times"></i></button>
             <h2 id="modalTitle">Tu cuenta</h2>
+            
             <div id="auth-tabs">
                 <button class="tab-btn active" data-tab="login">Iniciar Sesión</button>
                 <button class="tab-btn" data-tab="register">Registrarse</button>
             </div>
+            
             <!-- Login Form -->
             <form class="auth-form active" id="loginForm" novalidate>
                 <div class="form-group">
@@ -266,7 +343,8 @@
                 <button type="submit" class="submit-btn">Ingresar</button>
                 <div class="form-status" id="loginStatus"></div>
             </form>
-            <!-- Register Form (teléfono con prefijo +53 por defecto) -->
+            
+            <!-- Register Form (con prefijo +53 por defecto) -->
             <form class="auth-form" id="registerForm" novalidate>
                 <div class="form-group">
                     <label for="registerUsername">Nombre de usuario</label>
@@ -296,10 +374,11 @@
         // ========================================
         // CONFIGURACIÓN DE SUPABASE (EMBEBIDA)
         // ========================================
-        const SUPABASE_URL = 'https://jkptanntcnwyvefcoeul.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_QzksAjwRvfobZmfXykdTJw_ncgzw_DC';
+        const SUPABASE_URL = 'https://yjrwuwtxccetcfqtwoon.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_wwbhy332ldwRi1iK8sXsGQ_mCy3VQMF';
+        
         window.supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        console.log('✅ Supabase inicializado');
+        console.log('✅ Supabase inicializado correctamente');
     </script>
     <script src="app.js"></script>
 </body>
