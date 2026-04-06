@@ -1045,7 +1045,7 @@ h1, h2, h3, h4, h5, h6 {
         display: block;
     }
     .nav-links, .nav-actions {
-        display: none;
+
         position: fixed;
         top: 80px;
         left: -100%;

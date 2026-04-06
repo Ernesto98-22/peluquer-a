@@ -121,11 +121,12 @@
     <script>
         // ========================================
         // CONFIGURACIÓN DE SUPABASE (EMBEBIDA)
-        // ¡REEMPLAZA CON TUS DATOS REALES DE PELUQUERÍA!
         // ========================================
-        const SUPABASE_URL = 'https://TU_PROYECTO_PELUQUERIA.supabase.co';
-        const SUPABASE_ANON_KEY = 'TU_CLAVE_ANONIMA_AQUI';
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const SUPABASE_URL = 'https://yjrwuwtxccetcfqtwoon.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_wwbhy332ldwRi1iK8sXsGQ_mCy3VQMF';
+        
+        // Usamos un nombre distinto a "supabase" para evitar colisión con la variable global
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         
         let currentUser = null;
         let editingProductId = null;
@@ -133,7 +134,7 @@
         let reservasData = [];
 
         document.addEventListener('DOMContentLoaded', async () => {
-            if (!supabase) { 
+            if (!supabaseClient) { 
                 document.getElementById('loginError').innerHTML = 'Error de conexión con Supabase. Verifica las credenciales.'; 
                 return;
             }
@@ -157,9 +158,9 @@
         });
 
         async function checkAdminSession() {
-            const { data: { session } } = await supabase.auth.getSession();
+            const { data: { session } } = await supabaseClient.auth.getSession();
             if (!session) return;
-            const { data: adminData } = await supabase.from('admin_emails').select('email').eq('email', session.user.email).single();
+            const { data: adminData } = await supabaseClient.from('admin_emails').select('email').eq('email', session.user.email).single();
             if (adminData) {
                 currentUser = session.user;
                 document.getElementById('loginContainer').style.display = 'none';
@@ -169,7 +170,7 @@
                 loadReviews();
                 updateStats();
             } else { 
-                await supabase.auth.signOut(); 
+                await supabaseClient.auth.signOut(); 
             }
         }
 
@@ -178,20 +179,20 @@
             const password = document.getElementById('adminPassword').value;
             const errorDiv = document.getElementById('loginError');
             if (!email || !password) { errorDiv.innerHTML = 'Completa todos los campos'; return; }
-            const { error } = await supabase.auth.signInWithPassword({ email, password });
+            const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
             if (error) { errorDiv.innerHTML = 'Credenciales inválidas'; return; }
-            const { data: adminData } = await supabase.from('admin_emails').select('email').eq('email', email).single();
-            if (!adminData) { errorDiv.innerHTML = 'No tienes permisos de administrador'; await supabase.auth.signOut(); return; }
-            currentUser = (await supabase.auth.getUser()).data.user;
+            const { data: adminData } = await supabaseClient.from('admin_emails').select('email').eq('email', email).single();
+            if (!adminData) { errorDiv.innerHTML = 'No tienes permisos de administrador'; await supabaseClient.auth.signOut(); return; }
+            currentUser = (await supabaseClient.auth.getUser()).data.user;
             document.getElementById('loginContainer').style.display = 'none';
             document.getElementById('dashboard').style.display = 'block';
             loadProducts(); loadReservas(); loadReviews(); updateStats();
         }
 
-        async function logout() { await supabase.auth.signOut(); location.reload(); }
+        async function logout() { await supabaseClient.auth.signOut(); location.reload(); }
 
         async function loadProducts() {
-            const { data } = await supabase.from('productos').select('*').order('created_at', { ascending: false });
+            const { data } = await supabaseClient.from('productos').select('*').order('created_at', { ascending: false });
             productsData = data || [];
             const tbody = document.getElementById('productsTableBody');
             if (!tbody) return;
@@ -218,7 +219,7 @@
                 document.getElementById('productModal').classList.add('active');
             }
         };
-        window.deleteProduct = async (id) => { if (confirm('¿Eliminar?')) { await supabase.from('productos').delete().eq('id', id); loadProducts(); updateStats(); } };
+        window.deleteProduct = async (id) => { if (confirm('¿Eliminar?')) { await supabaseClient.from('productos').delete().eq('id', id); loadProducts(); updateStats(); } };
         function openProductModal() { editingProductId = null; document.getElementById('prodNombre').value = ''; document.getElementById('prodPrecio').value = ''; document.getElementById('prodImagen').value = ''; document.getElementById('prodCategoria').value = 'tintes'; document.getElementById('modalTitle').innerHTML = 'Agregar Producto'; document.getElementById('productModal').classList.add('active'); }
         function closeProductModal() { document.getElementById('productModal').classList.remove('active'); }
         async function saveProduct() {
@@ -227,30 +228,34 @@
             const imagen_url = document.getElementById('prodImagen').value.trim();
             const categoria = document.getElementById('prodCategoria').value;
             if (!nombre || isNaN(precio)) { alert('Datos inválidos'); return; }
-            if (editingProductId) { await supabase.from('productos').update({ nombre, precio, imagen_url, categoria }).eq('id', editingProductId); }
-            else { await supabase.from('productos').insert([{ nombre, precio, imagen_url, categoria }]); }
+            if (editingProductId) { await supabaseClient.from('productos').update({ nombre, precio, imagen_url, categoria }).eq('id', editingProductId); }
+            else { await supabaseClient.from('productos').insert([{ nombre, precio, imagen_url, categoria }]); }
             closeProductModal(); loadProducts(); updateStats();
         }
 
         async function loadReservas() {
-            const { data } = await supabase.from('reservas').select('*').order('created_at', { ascending: false });
+            const { data } = await supabaseClient.from('reservas').select('*').order('created_at', { ascending: false });
             reservasData = data || [];
             const tbody = document.getElementById('reservasTableBody');
             if (!tbody) return;
             tbody.innerHTML = reservasData.map(r => `
                 <tr>
-                    <td>${escapeHtml(r.nombre)}</td><td>${r.telefono}</td><td>${r.fecha}</td><td>${r.hora}</td><td>${escapeHtml(r.servicios)}</td>
+                    <td>${escapeHtml(r.nombre)}</td>
+                    <td>${r.telefono}</td>
+                    <td>${r.fecha}</td>
+                    <td>${r.hora}</td>
+                    <td>${escapeHtml(r.servicios)}</td>
                     <td><span style="background:${r.estado==='pendiente'?'#ffb347':'#27ae60'}; padding:4px 8px; border-radius:20px;">${r.estado}</span></td>
                     <td><button class="action-btn" style="background:#27ae60; color:white;" onclick="window.updateReserva('${r.id}','confirmada')">Aprobar</button>
                     <button class="action-btn delete-btn" onclick="window.deleteReserva('${r.id}')">Eliminar</button></td>
                 </tr>
             `).join('');
         }
-        window.updateReserva = async (id, estado) => { await supabase.from('reservas').update({ estado }).eq('id', id); loadReservas(); updateStats(); };
-        window.deleteReserva = async (id) => { if (confirm('¿Eliminar reserva?')) { await supabase.from('reservas').delete().eq('id', id); loadReservas(); updateStats(); } };
+        window.updateReserva = async (id, estado) => { await supabaseClient.from('reservas').update({ estado }).eq('id', id); loadReservas(); updateStats(); };
+        window.deleteReserva = async (id) => { if (confirm('¿Eliminar reserva?')) { await supabaseClient.from('reservas').delete().eq('id', id); loadReservas(); updateStats(); } };
 
         async function loadReviews() {
-            const { data } = await supabase.from('reviews').select('*').order('created_at', { ascending: false });
+            const { data } = await supabaseClient.from('reviews').select('*').order('created_at', { ascending: false });
             const pending = data.filter(r => !r.approved);
             const approved = data.filter(r => r.approved);
             document.getElementById('pendingReviewsList').innerHTML = pending.map(r => renderReviewItem(r, false)).join('');
@@ -261,13 +266,13 @@
             const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
             return `<div class="review-item"><div class="review-content"><strong>${escapeHtml(r.nombre_usuario)}</strong><div class="review-rating">${stars}</div><p>${escapeHtml(r.comentario)}</p><small>${new Date(r.created_at).toLocaleDateString()}</small></div><div class="review-actions">${!isApproved ? `<button class="action-btn approve-btn" onclick="window.approveReview('${r.id}')">Aprobar</button>` : ''}<button class="action-btn delete-btn" onclick="window.deleteReview('${r.id}')">Eliminar</button></div></div>`;
         }
-        window.approveReview = async (id) => { await supabase.from('reviews').update({ approved: true }).eq('id', id); loadReviews(); updateStats(); };
-        window.deleteReview = async (id) => { if (confirm('¿Eliminar reseña?')) { await supabase.from('reviews').delete().eq('id', id); loadReviews(); updateStats(); } };
+        window.approveReview = async (id) => { await supabaseClient.from('reviews').update({ approved: true }).eq('id', id); loadReviews(); updateStats(); };
+        window.deleteReview = async (id) => { if (confirm('¿Eliminar reseña?')) { await supabaseClient.from('reviews').delete().eq('id', id); loadReviews(); updateStats(); } };
 
         async function updateStats() {
-            const { count: productCount } = await supabase.from('productos').select('*', { count: 'exact', head: true });
-            const { count: pendingReservas } = await supabase.from('reservas').select('*', { count: 'exact', head: true }).eq('estado', 'pendiente');
-            const { count: pendingReviews } = await supabase.from('reviews').select('*', { count: 'exact', head: true }).eq('approved', false);
+            const { count: productCount } = await supabaseClient.from('productos').select('*', { count: 'exact', head: true });
+            const { count: pendingReservas } = await supabaseClient.from('reservas').select('*', { count: 'exact', head: true }).eq('estado', 'pendiente');
+            const { count: pendingReviews } = await supabaseClient.from('reviews').select('*', { count: 'exact', head: true }).eq('approved', false);
             document.getElementById('totalProducts').innerText = productCount || 0;
             document.getElementById('pendingReservas').innerText = pendingReservas || 0;
             document.getElementById('pendingReviews').innerText = pendingReviews || 0;
